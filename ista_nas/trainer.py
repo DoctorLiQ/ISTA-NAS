@@ -163,3 +163,4 @@ class Trainer:
             x_normals = self.do_recovery(base_A_normals, alpha_normal)
             x_reduces = self.do_recovery(base_A_reduces, alpha_reduce)
             self.show_selected(i+1, x_normals, x_reduces)
+            print("random matrix base_A_normals {}".format(base_A_normals[0]))
