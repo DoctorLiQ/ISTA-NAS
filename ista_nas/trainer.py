@@ -150,17 +150,21 @@ class Trainer:
         x_reduces = self.do_recovery(base_A_reduces, alpha_reduce)
 
         self.show_selected(0, x_normals, x_reduces)
-
+        print("===============================x_normals={},{}".format(x_normals[0],x_normals[1]))
         for i in range(self.cfg.epochs):
             A_normals, normal_biases = self.sample_and_proj(
                 base_A_normals, x_normals)
             A_reduces, reduce_biases = self.sample_and_proj(
                 base_A_reduces, x_reduces)
             print("Doing Search ...")
+            
             alpha_normal, alpha_reduce = self.do_search(A_normals, normal_biases,
                                                        A_reduces, reduce_biases, i+1)
             print("Doing Recovery ...")
+           
             x_normals = self.do_recovery(base_A_normals, alpha_normal)
             x_reduces = self.do_recovery(base_A_reduces, alpha_reduce)
             self.show_selected(i+1, x_normals, x_reduces)
             print("random matrix base_A_normals {}".format(base_A_normals[0]))
+            print("===============================x_normals={},{}".format(x_normals[0],x_normals[1]))
+
