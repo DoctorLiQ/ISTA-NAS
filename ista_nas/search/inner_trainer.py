@@ -56,10 +56,10 @@ class InnerTrainer:
             _i = _i+1
         print("-----------sample single path {},{}".format(b_normals_index,b_ruduce_index))
         
-        new_model  =self.model.new_model().cuda()
+        new_model  =self.model.new()
         model_dict = self.model.state_dict()
         new_model.load_state_dict(model_dict)
-        
+        new_model.cuda()
         ACC =[]
         for _i in range(self.sample_single_path):
             new_b_normal = torch.torch.zeros_like(b_normals)
