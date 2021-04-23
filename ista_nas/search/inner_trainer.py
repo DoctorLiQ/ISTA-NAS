@@ -33,7 +33,7 @@ class InnerTrainer:
         self.outer_trainer = OuterTrainer(self.model, cfg)
 
 
-    def nesh_update(self):
+    def nesh_update(self,input_search):
         b_normals= self.model.arch_parameters()[0]
         b_reduce = self.model.arch_parameters()[1]
         print(b_normals,b_reduce)
@@ -105,7 +105,7 @@ class InnerTrainer:
             target_search = target_search.cuda()
 
             # self.outer_trainer.step(input_search, target_search)
-            self.nesh_update()
+            self.nesh_update(input_search)
             ###update supernet weights
             self.optimizer.zero_grad()
             scores = self.model(input)
