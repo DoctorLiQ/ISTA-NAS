@@ -77,7 +77,7 @@ class InnerTrainer:
             n = input_search.size(0)
             top1 = AverageMeter()
             top5 = AverageMeter()
-            prec1, prec5 = accuracy(scores, target, topk=(1, 5))
+            prec1, prec5 = accuracy(scores, target_search, topk=(1, 5))
             losses.update(loss.item(), n)
             top1.update(prec1.item(), n)
             top5.update(prec5.item(), n)
