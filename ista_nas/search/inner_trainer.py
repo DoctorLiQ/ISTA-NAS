@@ -85,6 +85,8 @@ class InnerTrainer:
             Acc.append(top1.avg)
 
         b_nesh_normal,b_nesh_reduce = nesh_step(Acc,b_normals_index,b_reduce_index)
+        b_nesh_normal =  b_nesh_normal.to(self.model._arch_parameters[0].device)
+        b_nesh_reduce = b_nesh_reduce.to(self.model._arch_parameters[1].device)
         self.model._arch_parameters = [b_nesh_normal,b_nesh_reduce]
             
     def train_epoch(self, train_queue, valid_queue, epoch):
@@ -118,7 +120,7 @@ class InnerTrainer:
             ###update supernet weights
             self.optimizer.zero_grad()
             scores = self.model(input)
-            loss = F.cross_entropy(scores, target).cpu()
+            loss = F.cross_entropy(scores, target)
             loss.backward()
             nn.utils.clip_grad_norm_(self.model.parameters(), self.grad_clip)
             self.optimizer.step()
