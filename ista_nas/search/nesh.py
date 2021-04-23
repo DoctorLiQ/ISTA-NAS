@@ -25,6 +25,7 @@ def nesh_step(Acc,normal_index,reduce_index):
     alpha = []
     for iteration in range(2):
         p_min = []
+        epoch=0
         while epoch < 20000:
             random.seed(epoch)
             p = np.random.rand(4,k)
