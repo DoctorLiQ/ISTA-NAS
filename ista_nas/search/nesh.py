@@ -81,7 +81,7 @@ def nesh_step(Acc,normal_index,reduce_index):
     
     epoch = 0
     iteration = 0
-    min_u_min = [100, epoch]
+   
     # normal_alpha = []
     # reduce_alpha = []
     alpha = []
@@ -91,6 +91,7 @@ def nesh_step(Acc,normal_index,reduce_index):
             utility[index[i][0],index[i][1],index[i][2],index[i][3]] = Acc[i]
         p_min = []
         epoch = 0
+        min_u_min = [100, epoch]
         print("=====",epoch)
         while epoch < 20000:
             random.seed(epoch)
@@ -119,6 +120,7 @@ def nesh_step(Acc,normal_index,reduce_index):
             if u_min < min_u_min[0] :
                 p_min = p
                 min_u_min = [u_min, epoch]
+           
             epoch += 1
             # print(p_min)
             # print(min_u_min)
