@@ -6,7 +6,7 @@ import torch.nn.functional as F
 from .outer_trainer import OuterTrainer
 from .models import NetWork
 from ..utils import *
-form .nesh import Nesh
+form .nesh import nesh_step
 
 __all__ = ["InnerTrainer"]
 
@@ -72,8 +72,7 @@ class InnerTrainer:
             acc =new_model(input_search)
             prit("------ acc {},={}".format(_i,acc))
             Acc.append(acc)
-        nesh =Nesh()
-        b_nesh_normal,b_nesh_reduce = nesh.step(ACC,b_normals_index,b_ruduce_index)
+        b_nesh_normal,b_nesh_reduce = nesh_step(ACC,b_normals_index,b_ruduce_index)
         self.model._arch_parameters = [b_nesh_normal,b_nesh_reduce]
             
     def train_epoch(self, train_queue, valid_queue, epoch):
