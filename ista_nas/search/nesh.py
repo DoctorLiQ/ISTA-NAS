@@ -20,7 +20,7 @@ def nesh_step(Acc,normal_index,reduce_index):
     epoch = 0
     iteration = 0
     min_u_min = [100, epoch]
-    nomral_alpha = []
+    normal_alpha = []
     reduce_alpha = []
     alpha = [normal_alpha,reduce_alpha]
     for iteration in range(2):
