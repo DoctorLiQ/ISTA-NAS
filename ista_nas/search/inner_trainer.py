@@ -118,7 +118,7 @@ class InnerTrainer:
             ###update supernet weights
             self.optimizer.zero_grad()
             scores = self.model(input)
-            loss = F.cross_entropy(scores, target)
+            loss = F.cross_entropy(scores, target).cpu()
             loss.backward()
             nn.utils.clip_grad_norm_(self.model.parameters(), self.grad_clip)
             self.optimizer.step()
