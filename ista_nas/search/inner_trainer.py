@@ -74,7 +74,7 @@ class InnerTrainer:
             
             scores =new_model(input_search)
             loss = F.cross_entropy(scores, target_search)
-            n = input.size(0)
+            n = input_search.size(0)
             top1 = AverageMeter()
             top5 = AverageMeter()
             prec1, prec5 = accuracy(scores, target, topk=(1, 5))
