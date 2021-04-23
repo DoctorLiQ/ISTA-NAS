@@ -38,7 +38,7 @@ class InnerTrainer:
         b_reduce = self.model.arch_parameters()[1]
         print(b_normals,b_reduce)
         b_normals_index=[]
-        b_ruduce_index=[]
+        b_reduce_index=[]
         
         _i = 0
         while _i<self.sample_single_path:
@@ -51,14 +51,15 @@ class InnerTrainer:
                 reduce_temp.append(index.data[0].tolist())
             # if normal_temp not in b_normals_index:
             b_normals_index.append(normal_temp)
-            b_ruduce_index.append(reduce_temp)
+            b_reduce_index.append(reduce_temp)
             #     _i = _i+1
             _i = _i+1
-        print("-----------sample single path {},{}".format(b_normals_index,b_ruduce_index))
+        print("-----------sample single path {},{}".format(b_normals_index,b_reduce_index))
         
-        new_model  =self.model.new()
-        model_dict = self.model.state_dict()
-        new_model.load_state_dict(model_dict)
+        new_model =self.model
+        # new_model  =self.model.new()
+        # model_dict = self.model.state_dict()
+        # new_model.load_state_dict(model_dict)
         
         ACC =[]
         for _i in range(self.sample_single_path):
@@ -66,15 +67,15 @@ class InnerTrainer:
             new_b_reduce = torch.zeros_like(b_reduce)
             for _j in range(self._steps):
                 new_b_normal.data[_j][b_normals_index[_i][_j]]=1
-                new_b_reduce.data[_j][b_ruduce_index[_i][_j]]=1
+                new_b_reduce.data[_j][b_reduce_index[_i][_j]]=1
 
             new_model.alphas_normal_ = new_b_normal.copy()
             new_model.alphas_reduce_ =new_b_reduce.copy()
             
             acc =new_model(input_search)
-            prit("------ acc {},={}".format(_i,acc))
+            print("------ acc {},={}".format(_i,acc))
             Acc.append(acc)
-        b_nesh_normal,b_nesh_reduce = nesh_step(ACC,b_normals_index,b_ruduce_index)
+        b_nesh_normal,b_nesh_reduce = nesh_step(ACC,b_normals_index,b_reduce_index)
         self.model._arch_parameters = [b_nesh_normal,b_nesh_reduce]
             
     def train_epoch(self, train_queue, valid_queue, epoch):
