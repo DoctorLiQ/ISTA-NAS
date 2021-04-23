@@ -14,7 +14,7 @@ def nesh_step(Acc,normal_index,reduce_index):
     #random.seed(1)
     #p = np.random.rand(4,k)#Create an array of the given shape and populate it with random samples from a uniform distribution over [0, 1)
     for i in range(len(normal_index)):
-        utility[normal_index[i][0],normal_index[i][1],noraml_index[i][2],normal_index[i][3]] = Acc[i]
+        utility[normal_index[i][0],normal_index[i][1],normal_index[i][2],normal_index[i][3]] = Acc[i]
     for i in range(len(normal_index)):
         utility[reduce_index[i][0],reduce_index[i][1],reduce_index[i][2],reduce_index[i][3]] = Acc[i]
     epoch = 0
