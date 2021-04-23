@@ -33,7 +33,7 @@ class InnerTrainer:
         self.outer_trainer = OuterTrainer(self.model, cfg)
 
 
-    def nesh_update(self,input_search):
+    def nesh_update(self,input_search,target_search):
         b_normals= self.model.arch_parameters()[0]
         b_reduce = self.model.arch_parameters()[1]
         print(b_normals,b_reduce)
@@ -72,11 +72,19 @@ class InnerTrainer:
             new_model.alphas_normal_ = nn.Parameter(new_b_normal)
             new_model.alphas_reduce_ =nn.Parameter(new_b_reduce)
             
-            acc =new_model(input_search)
-            print("------ acc {},={}".format(_i,acc))
-            Acc.append(acc)
+            scores =new_model(input_search)
+            loss = F.cross_entropy(scores, target_search)
+            n = input.size(0)
+            top1 = AverageMeter()
+            top5 = AverageMeter()
+            prec1, prec5 = accuracy(scores, target, topk=(1, 5))
+            losses.update(loss.item(), n)
+            top1.update(prec1.item(), n
+            top5.update(prec5.item(), n)
+            print("------ acc {},={}".format(_i,top1))
+            Acc.append(top1)
         b_nesh_normal,b_nesh_reduce = nesh_step(Acc,b_normals_index,b_reduce_index)
-        self.model._arch_parameters = [b_nesh_normal,b_nesh_reduce]
+        self.model._arch_parameters.data = [b_nesh_normal,b_nesh_reduce]
             
     def train_epoch(self, train_queue, valid_queue, epoch):
         losses = AverageMeter()
@@ -105,7 +113,7 @@ class InnerTrainer:
             target_search = target_search.cuda()
 
             # self.outer_trainer.step(input_search, target_search)
-            self.nesh_update(input_search)
+            self.nesh_update(input_search,target_search)
             ###update supernet weights
             self.optimizer.zero_grad()
             scores = self.model(input)
