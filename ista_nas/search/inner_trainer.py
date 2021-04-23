@@ -75,16 +75,17 @@ class InnerTrainer:
             scores =new_model(input_search)
             loss = F.cross_entropy(scores, target_search)
             n = input_search.size(0)
+            print("=========n={}".format(n))
             top1 = AverageMeter()
             top5 = AverageMeter()
             prec1, prec5 = accuracy(scores, target_search, topk=(1, 5))
             top1.update(prec1.item(), n)
             top5.update(prec5.item(), n)
-            print("------ acc {},={}".format(_i,top1.avg))
+            print("------ acc{}={}".format(_i,top1.avg))
             Acc.append(top1.avg)
-            
+
         b_nesh_normal,b_nesh_reduce = nesh_step(Acc,b_normals_index,b_reduce_index)
-        self.model._arch_parameters.data = [b_nesh_normal,b_nesh_reduce]
+        self.model._arch_parameters = [b_nesh_normal,b_nesh_reduce]
             
     def train_epoch(self, train_queue, valid_queue, epoch):
         losses = AverageMeter()
