@@ -8,7 +8,7 @@
 # sigma = 0.5
 # utility = np.random.normal( mu , sigma , k*k*k*k ).reshape((k,k,k,k))
 
-# def nesh_step(Acc,normal_index,reduce_index):
+# def nash_step(Acc,normal_index,reduce_index):
 #     # normals =nn.Parameter(torch.Tensor([[0.5,0.4,0.1],[0.6,0.2,0.2],[0.3,0.5,0.2],[0.1,0.9,0.0]]))
 #     # reduces =nn.Parameter(torch.Tensor([[0.5,0.4,0.1],[0.6,0.2,0.2],[0.3,0.5,0.2],[0.1,0.9,0.0]]))
 #     #random.seed(1)
@@ -68,7 +68,7 @@ import torch.nn as nn
 import random
 from sklearn import preprocessing
 
-def nesh_step(Acc,normal_index,reduce_index):
+def nash_step(Acc,normal_index,reduce_index):
     k = 3
     mu = 3
     sigma = 0.5
