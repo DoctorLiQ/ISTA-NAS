@@ -53,7 +53,7 @@ def nesh_step(Acc,normal_index,reduce_index):
                 p_min =  p
                 min_u_min = [u_min, epoch]
             epoch += 1
-            print(p_min)
-            print(min_u_min)
+            # print(p_min)
+            # print(min_u_min)
         alpha[iteration] = p_min
     return nn.Parameter(torch.Tensor(alpha[0])),nn.Parameter(torch.Tensor(alpha[1]))
