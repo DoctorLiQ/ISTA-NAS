@@ -75,7 +75,7 @@ class InnerTrainer:
             acc =new_model(input_search)
             print("------ acc {},={}".format(_i,acc))
             Acc.append(acc)
-        b_nesh_normal,b_nesh_reduce = nesh_step(ACC,b_normals_index,b_reduce_index)
+        b_nesh_normal,b_nesh_reduce = nesh_step(Acc,b_normals_index,b_reduce_index)
         self.model._arch_parameters = [b_nesh_normal,b_nesh_reduce]
             
     def train_epoch(self, train_queue, valid_queue, epoch):
