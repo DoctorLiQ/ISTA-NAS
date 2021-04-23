@@ -92,7 +92,7 @@ def nesh_step(Acc,normal_index,reduce_index):
         p_min = []
         epoch = 0
         min_u_min = [100, epoch]
-        print("=====",epoch)
+        # print("=====",epoch)
         while epoch < 20000:
             random.seed(epoch)
             p = np.random.rand(4,k)
@@ -125,7 +125,7 @@ def nesh_step(Acc,normal_index,reduce_index):
             # print(p_min)
             # print(min_u_min)
         alpha.append(p_min)
-        print(alpha,epoch)
+        # print(alpha,epoch)
         iteration += 1
-        print(iteration)
+        # print(iteration)
     return nn.Parameter(torch.Tensor(alpha[0])),nn.Parameter(torch.Tensor(alpha[1]))
