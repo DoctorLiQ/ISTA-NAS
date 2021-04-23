@@ -6,7 +6,7 @@ import torch.nn.functional as F
 from .outer_trainer import OuterTrainer
 from .models import NetWork
 from ..utils import *
-from .nesh import nesh_step
+from .nash import nash_step
 
 __all__ = ["InnerTrainer"]
 
@@ -33,7 +33,7 @@ class InnerTrainer:
         self.outer_trainer = OuterTrainer(self.model, cfg)
 
 
-    def nesh_update(self,input_search,target_search):
+    def nash_update(self,input_search,target_search):
         b_normals= self.model.arch_parameters()[0]
         b_reduce = self.model.arch_parameters()[1]
         print(b_normals,b_reduce)
@@ -83,10 +83,10 @@ class InnerTrainer:
             Acc.append(top1.avg)
         print("----n={}-----acc={}".format(input_search.size()[0],Acc))
 
-        b_nesh_normal,b_nesh_reduce = nesh_step(Acc,b_normals_index,b_reduce_index)
-        b_nesh_normal =  b_nesh_normal.to(self.model._arch_parameters[0].device)
-        b_nesh_reduce = b_nesh_reduce.to(self.model._arch_parameters[1].device)
-        self.model._arch_parameters = [b_nesh_normal,b_nesh_reduce]
+        b_nash_normal,b_nash_reduce = nash_step(Acc,b_normals_index,b_reduce_index)
+        b_nash_normal =  b_nash_normal.to(self.model._arch_parameters[0].device)
+        b_nash_reduce = b_nash_reduce.to(self.model._arch_parameters[1].device)
+        self.model._arch_parameters = [b_nash_normal,b_nash_reduce]
             
     def train_epoch(self, train_queue, valid_queue, epoch):
         losses = AverageMeter()
@@ -115,7 +115,7 @@ class InnerTrainer:
             target_search = target_search.cuda()
 
             # self.outer_trainer.step(input_search, target_search)
-            self.nesh_update(input_search,target_search)
+            self.nash_update(input_search,target_search)
             ###update supernet weights
             self.optimizer.zero_grad()
             scores = self.model(input)
