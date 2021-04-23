@@ -1,7 +1,6 @@
 import torch
 import numpy as np
 import torch.nn as nn
-import numpy as np
 import random
 from sklearn import preprocessing
 k = 3

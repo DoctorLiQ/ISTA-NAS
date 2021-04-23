@@ -61,7 +61,7 @@ class InnerTrainer:
         # model_dict = self.model.state_dict()
         # new_model.load_state_dict(model_dict)
         
-        Acc =[]
+        Acc=[]
         for _i in range(self.sample_single_path):
             new_b_normal = torch.torch.zeros_like(b_normals)
             new_b_reduce = torch.zeros_like(b_reduce)
@@ -82,7 +82,7 @@ class InnerTrainer:
             top1.update(prec1.item(), n)
             top5.update(prec5.item(), n)
             Acc.append(top1.avg)
-        print("------ acc{}={}".format(Acc))
+        print("------ acc={}".format(Acc))
 
         b_nesh_normal,b_nesh_reduce = nesh_step(Acc,b_normals_index,b_reduce_index)
         b_nesh_normal =  b_nesh_normal.to(self.model._arch_parameters[0].device)
