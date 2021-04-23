@@ -17,7 +17,7 @@ def parse():
     parser = argparse.ArgumentParser("cifar-ISTANAS")
     parser.add_argument('--data', type=str, default='~/data', help='location of the data corpus')
     parser.add_argument('--batch_size', type=int, default=64, help='batch size')
-    parser.add_argument('--proj_dims', type=int, default=7, help='proj dimensions')
+    parser.add_argument('--proj_dims', type=int, default=3, help='proj dimensions')
     parser.add_argument('--sparseness', type=int, default=2, help='sparseness')
     parser.add_argument('--num_classes', type=int, default=10, help='num_classes')
     parser.add_argument('--learning_rate', type=float, default=0.025, help='init learning rate')

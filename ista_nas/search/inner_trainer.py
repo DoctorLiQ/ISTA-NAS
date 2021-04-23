@@ -46,9 +46,9 @@ class InnerTrainer:
             reduce_temp=[]
             for i in range(self._steps):
                 index = torch.multinomial(torch.softmax(b_normals[i],dim=-1),1,replacement=True)
-                normal_temp.append(index)
+                normal_temp.append(index.data[0].tolist())
                 index = torch.multinomial(torch.softmax(b_reduce[i],dim=-1),1,replacement=True)
-                reduce_temp.append(index)
+                reduce_temp.append(index.data[0].tolist())
             # if normal_temp not in b_normals_index:
             b_normals_index.append(normal_temp)
             b_ruduce_index.append(reduce_temp)
@@ -65,8 +65,8 @@ class InnerTrainer:
             new_b_normal = torch.torch.zeros_like(b_normals)
             new_b_reduce = torch.zeros_like(b_reduce)
             for _j in range(self._steps):
-                new_b_normal[_j][b_normals_index[_i][_j]]=1
-                new_b_reduce[_j][b_ruduce_index[_i][_j]]=1
+                new_b_normal.data[_j][b_normals_index[_i][_j]]=1
+                new_b_reduce.data[_j][b_ruduce_index[_i][_j]]=1
 
             new_model.alphas_normal_ = new_b_normal.copy()
             new_model.alphas_reduce_ =new_b_reduce.copy()
