@@ -18,7 +18,6 @@ log_format = '%(asctime)s %(message)s'
 logging.basicConfig(stream=sys.stdout, level=logging.INFO,
                     format=log_format, datefmt='%m/%d %I:%M:%S %p')
 
-
 class Trainer:
     def __init__(self, cfg):
         self.cfg = cfg

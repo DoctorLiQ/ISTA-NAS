@@ -40,6 +40,7 @@ def parse():
     parser.add_argument('--train_portion', type=float, default=0.5, help='portion of training data')
     parser.add_argument('--arch_learning_rate', type=float, default=3e-4, help='learning rate for arch encoding')
     parser.add_argument('--arch_weight_decay', type=float, default=1e-3, help='weight decay for arch encoding')
+    parse().add_argument('--sample_single_path',type=int,default=5,help="number of single path")
     args = parser.parse_args()
 
     return args
