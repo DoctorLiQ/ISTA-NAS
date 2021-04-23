@@ -50,8 +50,8 @@ class InnerTrainer:
                 index = torch.multinomial(b_reduce,1,replacement=True)
                 reduce_temp.append(index)
             # if normal_temp not in b_normals_index:
-            #     b_normals_index.append(normal_temp)
-            #     b_ruduce_index.append(reduce_temp)
+            b_normals_index.append(normal_temp)
+            b_ruduce_index.append(reduce_temp)
             #     _i = _i+1
             _i = _i+1
         print("-----------sample single path {},{}".format(b_normals_index,b_ruduce_index))
