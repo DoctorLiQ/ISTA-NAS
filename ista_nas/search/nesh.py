@@ -22,7 +22,7 @@ def nesh_step(Acc,normal_index,reduce_index):
     min_u_min = [100, epoch]
     normal_alpha = []
     reduce_alpha = []
-    alpha = [normal_alpha,reduce_alpha]
+    alpha = []
     for iteration in range(2):
         p_min = []
         while epoch < 20000:
@@ -55,6 +55,6 @@ def nesh_step(Acc,normal_index,reduce_index):
             epoch += 1
             # print(p_min)
             # print(min_u_min)
-        alpha[iteration] = p_min
+        alpha.append(p_min)
     print(alpha)
     return nn.Parameter(torch.Tensor(alpha[0])),nn.Parameter(torch.Tensor(alpha[1]))
