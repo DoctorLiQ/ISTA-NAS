@@ -18,6 +18,7 @@ class InnerTrainer:
         self.model = NetWork(cfg.init_channels, cfg.num_classes, cfg.layers, proj_dims=cfg.proj_dims).cuda()
         print("Param size = {}MB".format(count_parameters_in_MB(self.model)))
         self.sample_single_path = cfg.sample_single_path 
+        self._steps =cfg.steps
         weights = []
         for k, p in self.model.named_parameters():
             if 'alpha' not in k:
