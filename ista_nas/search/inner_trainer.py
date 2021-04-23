@@ -69,8 +69,8 @@ class InnerTrainer:
                 new_b_normal.data[_j][b_normals_index[_i][_j]]=1
                 new_b_reduce.data[_j][b_reduce_index[_i][_j]]=1
 
-            new_model.alphas_normal_ = new_b_normal
-            new_model.alphas_reduce_ =new_b_reduce
+            new_model.alphas_normal_ = nn.Parameter(new_b_normal)
+            new_model.alphas_reduce_ =nn.Parameter(new_b_reduce)
             
             acc =new_model(input_search)
             print("------ acc {},={}".format(_i,acc))
