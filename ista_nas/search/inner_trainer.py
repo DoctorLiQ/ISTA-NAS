@@ -54,7 +54,7 @@ class InnerTrainer:
             b_ruduce_index.append(reduce_temp)
             #     _i = _i+1
             _i = _i+1
-        print("-----------sample single path {},{}".format(b_normals_index,b_ruduce_index))
+        # print("-----------sample single path {},{}".format(b_normals_index,b_ruduce_index))
         
         new_model  =self.model.new()
         model_dict = self.model.state_dict()
