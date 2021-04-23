@@ -45,9 +45,9 @@ class InnerTrainer:
             normal_temp=[]
             reduce_temp=[]
             for i in range(self._steps):
-                index = torch.multinomial(b_normals,1,replacement=True)
+                index = torch.multinomial(torch.softmax(b_normals[i],dim=-1),1,replacement=True)
                 normal_temp.append(index)
-                index = torch.multinomial(b_reduce,1,replacement=True)
+                index = torch.multinomial(torch_softmax(b_reduce[i],dim=-1),1,replacement=True)
                 reduce_temp.append(index)
             # if normal_temp not in b_normals_index:
             b_normals_index.append(normal_temp)
