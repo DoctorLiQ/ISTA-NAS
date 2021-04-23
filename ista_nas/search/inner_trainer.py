@@ -80,8 +80,9 @@ class InnerTrainer:
             prec1, prec5 = accuracy(scores, target_search, topk=(1, 5))
             top1.update(prec1.item(), n)
             top5.update(prec5.item(), n)
-            print("------ acc {},={}".format(_i,top1))
-            Acc.append(top1)
+            print("------ acc {},={}".format(_i,top1.avg))
+            Acc.append(top1.avg)
+            
         b_nesh_normal,b_nesh_reduce = nesh_step(Acc,b_normals_index,b_reduce_index)
         self.model._arch_parameters.data = [b_nesh_normal,b_nesh_reduce]
             
