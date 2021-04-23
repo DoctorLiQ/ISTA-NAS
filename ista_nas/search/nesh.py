@@ -78,7 +78,7 @@ def nesh_step(Acc,normal_index,reduce_index):
     #random.seed(1)
     #p = np.random.rand(4,k)#Create an array of the given shape and populate it with random samples from a uniform distribution over [0, 1)
     
-    #epoch = 0
+    epoch = 0
     iteration = 0
     min_u_min = [100, epoch]
     # normal_alpha = []
