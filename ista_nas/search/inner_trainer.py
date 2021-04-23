@@ -61,7 +61,7 @@ class InnerTrainer:
         # model_dict = self.model.state_dict()
         # new_model.load_state_dict(model_dict)
         
-        ACC =[]
+        Acc =[]
         for _i in range(self.sample_single_path):
             new_b_normal = torch.torch.zeros_like(b_normals)
             new_b_reduce = torch.zeros_like(b_reduce)
