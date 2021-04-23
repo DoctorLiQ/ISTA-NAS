@@ -56,7 +56,7 @@ class InnerTrainer:
             _i = _i+1
         print("-----------sample single path {},{}".format(b_normals_index,b_reduce_index))
         
-        new_model =self.model
+        new_model =self.model.cuda()
         # new_model  =self.model.new()
         # model_dict = self.model.state_dict()
         # new_model.load_state_dict(model_dict)
@@ -118,7 +118,7 @@ class InnerTrainer:
             ###update supernet weights
             self.optimizer.zero_grad()
             scores = self.model(input)
-            loss = F.cross_entropy(scores, target).cuda()
+            loss = F.cross_entropy(scores, target)
             loss.backward()
             nn.utils.clip_grad_norm_(self.model.parameters(), self.grad_clip)
             self.optimizer.step()
