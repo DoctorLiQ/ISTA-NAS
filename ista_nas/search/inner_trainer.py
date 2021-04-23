@@ -6,7 +6,7 @@ import torch.nn.functional as F
 from .outer_trainer import OuterTrainer
 from .models import NetWork
 from ..utils import *
-form .nesh import nesh_step
+from .nesh import nesh_step
 
 __all__ = ["InnerTrainer"]
 
